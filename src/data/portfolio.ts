@@ -28,36 +28,155 @@ export const socialLinks = [
   }
 ];
 
-export const skills = {
-  frontend: [
-    { name: "React.js", level: 90 },
-    { name: "JavaScript", level: 85 },
-    { name: "TypeScript", level: 80 },
-    { name: "HTML5", level: 95 },
-    { name: "CSS3", level: 90 },
-    { name: "Tailwind CSS", level: 85 },
-    { name: "Bootstrap", level: 80 }
-  ],
-  backend: [
-    { name: "Node.js", level: 85 },
-    { name: "Express.js", level: 80 },
-    { name: "Laravel", level: 85 },
-    { name: "PHP", level: 80 },
-    { name: "Python", level: 70 }
-  ],
-  database: [
-    { name: "MongoDB", level: 80 },
-    { name: "MySQL", level: 85 },
-    { name: "NoSQL", level: 75 }
-  ],
-  tools: [
-    { name: "Git/GitHub", level: 90 },
-    { name: "Docker", level: 75 },
-    { name: "VS Code", level: 95 },
-    { name: "Figma", level: 70 },
-    { name: "Jira", level: 75 }
-  ]
-};
+export const skills = [
+  // Frontend
+  {
+    name: "React.js",
+    category: "Frontend",
+    description: "Modern JavaScript library for building user interfaces",
+    icon: "SiReact",
+    color: "#61DAFB"
+  },
+  {
+    name: "JavaScript",
+    category: "Frontend", 
+    description: "Dynamic programming language for web development",
+    icon: "SiJavascript",
+    color: "#F7DF1E"
+  },
+  {
+    name: "TypeScript",
+    category: "Frontend",
+    description: "Statically typed superset of JavaScript",
+    icon: "SiTypescript", 
+    color: "#3178C6"
+  },
+  {
+    name: "HTML5",
+    category: "Frontend",
+    description: "Semantic markup language for web structure",
+    icon: "SiHtml5",
+    color: "#E34F26"
+  },
+  {
+    name: "CSS3",
+    category: "Frontend",
+    description: "Styling language for web presentation",
+    icon: "SiCss3",
+    color: "#1572B6"
+  },
+  {
+    name: "Tailwind CSS",
+    category: "Frontend",
+    description: "Utility-first CSS framework for rapid development",
+    icon: "SiTailwindcss",
+    color: "#06B6D4"
+  },
+  {
+    name: "Bootstrap",
+    category: "Frontend", 
+    description: "CSS framework for responsive web design",
+    icon: "SiBootstrap",
+    color: "#7952B3"
+  },
+
+  // Backend
+  {
+    name: "Node.js",
+    category: "Backend",
+    description: "JavaScript runtime for server-side development",
+    icon: "SiNodedotjs",
+    color: "#339933"
+  },
+  {
+    name: "Express.js", 
+    category: "Backend",
+    description: "Fast, minimalist web framework for Node.js",
+    icon: "SiExpress",
+    color: "#000000"
+  },
+  {
+    name: "Laravel",
+    category: "Backend",
+    description: "Elegant PHP framework for web artisans", 
+    icon: "SiLaravel",
+    color: "#FF2D20"
+  },
+  {
+    name: "PHP",
+    category: "Backend",
+    description: "Server-side scripting language for web development",
+    icon: "SiPhp",
+    color: "#777BB4"
+  },
+  {
+    name: "Python",
+    category: "Backend",
+    description: "Versatile programming language for various applications",
+    icon: "SiPython", 
+    color: "#3776AB"
+  },
+
+  // Database
+  {
+    name: "MongoDB",
+    category: "Database",
+    description: "NoSQL document database for modern applications",
+    icon: "SiMongodb",
+    color: "#47A248"
+  },
+  {
+    name: "MySQL",
+    category: "Database", 
+    description: "Reliable relational database management system",
+    icon: "SiMysql",
+    color: "#4479A1"
+  },
+
+  // Tools & DevOps
+  {
+    name: "Git",
+    category: "Tools & DevOps",
+    description: "Distributed version control system",
+    icon: "SiGit",
+    color: "#F05032"
+  },
+  {
+    name: "GitHub",
+    category: "Tools & DevOps",
+    description: "Web-based Git repository hosting service",
+    icon: "SiGithub", 
+    color: "#181717"
+  },
+  {
+    name: "Docker",
+    category: "Tools & DevOps",
+    description: "Platform for developing and deploying applications in containers",
+    icon: "SiDocker",
+    color: "#2496ED"
+  },
+  {
+    name: "VS Code",
+    category: "Tools & DevOps",
+    description: "Powerful source code editor with rich ecosystem",
+    icon: "SiVisualstudiocode",
+    color: "#007ACC"
+  },
+  {
+    name: "Figma", 
+    category: "Tools & DevOps",
+    description: "Collaborative design tool for UI/UX",
+    icon: "SiFigma",
+    color: "#F24E1E"
+  },
+  {
+    name: "Jira",
+    category: "Tools & DevOps", 
+    description: "Project management and issue tracking tool",
+    icon: "SiJira",
+    color: "#0052CC"
+  }
+];
 
 export const projects = [
   {
