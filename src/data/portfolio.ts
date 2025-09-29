@@ -13,17 +13,17 @@ export const personalInfo = {
 export const socialLinks = [
   {
     name: "LinkedIn",
-    url: "https://linkedin.com/in/ilyass-ezzaouya", // Update with your actual LinkedIn
+    url: "https://www.linkedin.com/in/ezzaouyailyass/", // Update with your actual LinkedIn
     icon: "linkedin"
   },
   {
     name: "GitHub",
-    url: "https://github.com/ilyassezzaouya", // Update with your actual GitHub
+    url: "https://github.com/Techinho", // Update with your actual GitHub
     icon: "github"
   },
   {
     name: "Email",
-    url: `mailto:${personalInfo.email}`,
+    url: `https://mail.google.com/mail/?view=cm&fs=1&to=${personalInfo.email}`, // Opens Gmail compose window
     icon: "mail"
   }
 ];
@@ -59,7 +59,7 @@ export const skills = [
     color: "#E34F26"
   },
   {
-    name: "CSS3",
+    name: "CSS",
     category: "Frontend",
     description: "Styling language for web presentation",
     icon: "SiCss3",
@@ -181,24 +181,6 @@ export const skills = [
 export const projects = [
   {
     id: 1,
-    title: "SGRF - Public Revenue Management System",
-    description: "Web application for centralizing and automating public revenue management for TGR (Treasury General of the Kingdom). Features multiple dashboards, secure authentication, and comprehensive reporting modules.",
-    longDescription: "Developed during my internship at TGR, this comprehensive system centralizes public revenue management through intuitive dashboards tailored to different user profiles. Built with React.js frontend and Laravel backend, featuring OAuth2/JWT authentication and advanced reporting capabilities.",
-    technologies: ["React.js", "Laravel", "MySQL", "OAuth2", "JWT"],
-    features: [
-      "Multi-profile dashboards",
-      "Secure authentication (OAuth2, JWT)",
-      "Revenue tracking and monitoring",
-      "Automated reminder system",
-      "Comprehensive reporting"
-    ],
-    image: "/project-sgrf.jpg", // You can replace with actual screenshots
-    liveUrl: "#", // Add live demo URL if available
-    githubUrl: "#", // Add GitHub repo URL if available
-    category: "Full Stack"
-  },
-  {
-    id: 2,
     title: "TECHEDU - Learning Platform",
     description: "Responsive web platform for technology learning with integrated YouTube videos and dedicated books section. Features smooth navigation and modern design.",
     longDescription: "A comprehensive educational platform that combines video content from YouTube API v3 with curated book resources. Built with React and Redux for optimal state management and user experience.",
@@ -210,14 +192,32 @@ export const projects = [
       "Redux state management",
       "Smooth navigation"
     ],
-    image: "/project-techedu.jpg",
-    liveUrl: "#",
-    githubUrl: "#",
+    image: "/Minimalist Website Launch Computer Mockup Instagram Post .png",
+    liveUrl: "https://edufy-five.vercel.app/",
+    githubUrl: "https://github.com/Techinho/Edufy",
     category: "Frontend"
   },
   {
+    id: 2,
+    title: "SGRF - Public Revenue Management System",
+    description: "Web application for centralizing and automating public revenue management for TGR (Treasury General of the Kingdom). Features multiple dashboards, secure authentication, and comprehensive reporting modules.",
+    longDescription: "Developed during my internship at TGR, this comprehensive system centralizes public revenue management through intuitive dashboards tailored to different user profiles. Built with React.js frontend and Laravel backend, featuring OAuth2/JWT authentication and advanced reporting capabilities.",
+    technologies: ["React.js", "Laravel", "MySQL", "OAuth2", "JWT"],
+    features: [
+      "Multi-profile dashboards",
+      "Secure authentication (OAuth2, JWT)",
+      "Revenue tracking and monitoring",
+      "Automated reminder system",
+      "Comprehensive reporting"
+    ],
+    image: "/tgr.png", // You can replace with actual screenshots
+    liveUrl: "#", // Add live demo URL if available
+    githubUrl: "#", // Add GitHub repo URL if available
+    category: "Full Stack"
+  },
+  {
     id: 3,
-    title: "FOREVER - E-commerce Platform",
+    title: "NutriVibe - E-commerce Platform",
     description: "Modern responsive e-commerce platform with dynamic product management, advanced filtering, shopping cart, and order system.",
     longDescription: "A full-featured e-commerce solution with modern UI/UX design. Includes product catalog with advanced filtering, shopping cart functionality, and complete order management system.",
     technologies: ["React.js", "Tailwind CSS", "Context API", "Local Storage"],
@@ -228,9 +228,9 @@ export const projects = [
       "Order management system",
       "Responsive design"
     ],
-    image: "/project-forever.jpg",
-    liveUrl: "#",
-    githubUrl: "#",
+    image: "/ecom.png",
+    liveUrl: "https://nutrivibe-liart.vercel.app/",
+    githubUrl: "https://github.com/Techinho/nutrivibe",
     category: "Frontend"
   }
 ];

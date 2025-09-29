@@ -16,6 +16,11 @@ export default {
       fontFamily: {
         body: ['Inter', 'sans-serif'],
         display: ['Inter', 'sans-serif'],
+        inter: ['Inter', 'sans-serif'],
+        mooxy: ['mooxy', 'Inter', 'sans-serif'],
+        sureme: ['sureme', 'Inter', 'sans-serif'],
+        quera: ['quera', 'Inter', 'sans-serif'],
+        jovelle: ['jovelle', 'Inter', 'sans-serif'],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -107,4 +112,17 @@ export default {
     },
   },
   plugins: [require("tailwindcss-animate")],
+  variants: {
+    extend: {
+      backgroundColor: [
+        'data-current',
+      ],
+      boxShadow: [
+        'data-current',
+      ],
+      scale: [
+        'data-current',
+      ],
+    },
+  },
 } satisfies Config;

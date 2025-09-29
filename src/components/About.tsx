@@ -1,215 +1,113 @@
 import { motion } from "framer-motion";
-import { MapPin, Mail, Download, Code, Coffee, Zap } from "lucide-react";
+import { Download, Heart, Coffee, Code } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
 import { personalInfo } from "@/data/portfolio";
 
 const About = () => {
-  // Floating code snippets for animation
-  const codeSnippets = [
-    "const dev = 'passionate'",
-    "function build() { return 'amazing' }",
-    "npm run create-magic",
-    "git commit -m 'another feature'",
-    "const skills = ['React', 'Node']",
-    "while(learning) { grow() }"
-  ];
+  const fadeInUp = {
+    hidden: { opacity: 0, y: 30 },
+    visible: { 
+      opacity: 1, 
+      y: 0,
+      transition: { 
+        duration: 0.8, 
+        ease: [0.25, 0.1, 0.25, 1] 
+      }
+    }
+  };
+
+  const staggerContainer = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
+        delayChildren: 0.1
+      }
+    }
+  };
 
   return (
-    <section id="about" className="py-20 bg-background">
-      <div className="section-container">
+    <section id="about" className="py-20">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 md:px-8 lg:px-16">
+        {/* Section Header */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
-            About <span className="text-gradient">Me</span>
-          </h2>
-          <div className="w-24 h-1 bg-gradient-purple mx-auto"></div>
+          <motion.div
+            variants={fadeInUp}
+            className="inline-flex items-center px-4 py-2 rounded-full border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900/60 backdrop-blur-sm mb-6"
+          >
+            <span className="text-slate-600 dark:text-slate-300 text-sm font-medium tracking-wide font-inter">
+              ABOUT ME
+            </span>
+          </motion.div>
+
+          <motion.h2
+            variants={fadeInUp}
+            className="font-inter text-3xl sm:text-4xl md:text-5xl font-light text-slate-900 dark:text-slate-100 leading-tight tracking-tight mb-8"
+          >
+            About Me
+          </motion.h2>
+
+          <motion.div
+            variants={fadeInUp}
+            className="space-y-6 max-w-3xl mx-auto"
+          >
+            <p className="font-inter text-lg text-slate-600 dark:text-slate-400 leading-relaxed">
+              I'm a passionate 20-year-old Full Stack Developer based in Rabat, Morocco, 
+              with a genuine love for creating meaningful digital experiences. My journey 
+              in web development began with curiosity and has evolved into a dedicated 
+              pursuit of crafting solutions that make a real impact.
+            </p>
+            
+            <p className="font-inter text-lg text-slate-600 dark:text-slate-400 leading-relaxed">
+              I specialize in the MERN stack and Laravel, bringing both technical expertise 
+              and creative problem-solving to every project. What drives me most is the 
+              opportunity to transform ideas into applications that users genuinely enjoy 
+              and find valuable.
+            </p>
+          </motion.div>
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          {/* Left Column - Personal Info */}
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="space-y-6"
-          >
-            <div>
-              <h3 className="text-2xl font-semibold text-foreground mb-4">
-                Full Stack Developer & Tech Enthusiast
-              </h3>
-              <p className="text-muted-foreground leading-relaxed text-lg">
-                {personalInfo.description}
-              </p>
-            </div>
+       
+        {/* Professional CTA Section */}
+        <motion.div 
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-50px" }}
+          className="text-center space-y-8"
+        >
+         
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div className="flex items-center space-x-3">
-                <MapPin className="h-5 w-5 text-primary" />
-                <span className="text-foreground">{personalInfo.location}</span>
-              </div>
-              <div className="flex items-center space-x-3">
-                <Mail className="h-5 w-5 text-primary" />
-                <a 
-                  href={`mailto:${personalInfo.email}`}
-                  className="text-primary hover:text-primary-light transition-colors link-animated"
-                >
-                  {personalInfo.email}
-                </a>
-              </div>
-            </div>
-
-            <Button className="btn-hero">
-              <Download className="mr-2 h-4 w-4" />
-              Download Resume
+          {/* CTA Buttons */}
+          <motion.div variants={fadeInUp} className="flex justify-center items-center gap-4 flex-wrap">
+            <Button
+              className="font-inter font-medium bg-slate-900 hover:bg-slate-800 dark:bg-slate-100 dark:text-slate-900 dark:hover:bg-slate-200 text-white px-8 py-6 text-base transition-all duration-300 shadow-sm hover:shadow-md"
+              asChild
+            >
+              <a href="./public/CV__Ilyass_Ezzaouya.pdf" download>
+                <Download className="mr-2 h-4 w-4" />
+                Download Resume
+              </a>
+            </Button>
+            <Button
+              variant="outline"
+              className="font-inter font-medium border-slate-300 dark:border-slate-600 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 px-8 py-6 text-base transition-all duration-300"
+              asChild
+            >
+              <a href="#contact">Get In Touch</a>
             </Button>
           </motion.div>
 
-          {/* Right Column - Animated Dev Component */}
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="relative"
-          >
-            {/* Main Dev Card */}
-            <Card className="card-interactive relative overflow-hidden">
-              <CardContent className="p-8">
-                <div className="text-center space-y-6">
-                  <motion.div
-                    className="relative mx-auto w-24 h-24 bg-gradient-purple rounded-full flex items-center justify-center"
-                    animate={{ 
-                      rotate: [0, 360],
-                      scale: [1, 1.1, 1]
-                    }}
-                    transition={{ 
-                      rotate: { duration: 20, repeat: Infinity, ease: "linear" },
-                      scale: { duration: 2, repeat: Infinity }
-                    }}
-                  >
-                    <Code className="h-10 w-10 text-white" />
-                  </motion.div>
-                  
-                  <div className="space-y-4">
-                    <h4 className="text-xl font-semibold text-foreground">
-                      Coding Journey
-                    </h4>
-                    
-                    {/* Animated Stats */}
-                    <div className="grid grid-cols-3 gap-4">
-                      <motion.div
-                        className="text-center p-3 rounded-lg bg-secondary"
-                        whileHover={{ scale: 1.05 }}
-                        transition={{ type: "spring", stiffness: 300 }}
-                      >
-                        <motion.div 
-                          className="text-2xl font-bold text-primary flex items-center justify-center"
-                          initial={{ scale: 0 }}
-                          whileInView={{ scale: 1 }}
-                          transition={{ delay: 0.5, type: "spring" }}
-                        >
-                          <Coffee className="h-5 w-5 mr-1" />
-                          ∞
-                        </motion.div>
-                        <div className="text-xs text-muted-foreground">Coffee</div>
-                      </motion.div>
-                      
-                      <motion.div
-                        className="text-center p-3 rounded-lg bg-secondary"
-                        whileHover={{ scale: 1.05 }}
-                        transition={{ type: "spring", stiffness: 300 }}
-                      >
-                        <motion.div 
-                          className="text-2xl font-bold text-primary flex items-center justify-center"
-                          initial={{ scale: 0 }}
-                          whileInView={{ scale: 1 }}
-                          transition={{ delay: 0.7, type: "spring" }}
-                        >
-                          <Zap className="h-5 w-5 mr-1" />
-                          24/7
-                        </motion.div>
-                        <div className="text-xs text-muted-foreground">Learning</div>
-                      </motion.div>
-                      
-                      <motion.div
-                        className="text-center p-3 rounded-lg bg-secondary"
-                        whileHover={{ scale: 1.05 }}
-                        transition={{ type: "spring", stiffness: 300 }}
-                      >
-                        <motion.div 
-                          className="text-2xl font-bold text-primary"
-                          initial={{ scale: 0 }}
-                          whileInView={{ scale: 1 }}
-                          transition={{ delay: 0.9, type: "spring" }}
-                        >
-                          10+
-                        </motion.div>
-                        <div className="text-xs text-muted-foreground">Certificates</div>
-                      </motion.div>
-                    </div>
-                  </div>
-                </div>
-                
-                {/* Floating code snippets */}
-                {codeSnippets.map((snippet, index) => (
-                  <motion.div
-                    key={index}
-                    className="absolute text-xs font-mono text-primary/30 pointer-events-none"
-                    style={{
-                      top: `${20 + (index * 12)}%`,
-                      left: `${10 + (index * 15)}%`,
-                    }}
-                    animate={{
-                      y: [0, -10, 0],
-                      opacity: [0.3, 0.6, 0.3],
-                    }}
-                    transition={{
-                      duration: 3 + index,
-                      repeat: Infinity,
-                      delay: index * 0.5,
-                    }}
-                  >
-                    {snippet}
-                  </motion.div>
-                ))}
-              </CardContent>
-            </Card>
-
-            {/* Floating elements around the card */}
-            <motion.div
-              className="absolute -top-4 -right-4 w-8 h-8 bg-primary rounded-full opacity-20"
-              animate={{
-                scale: [1, 1.2, 1],
-                rotate: [0, 180, 360],
-              }}
-              transition={{
-                duration: 4,
-                repeat: Infinity,
-                ease: "easeInOut"
-              }}
-            />
-            
-            <motion.div
-              className="absolute -bottom-4 -left-4 w-6 h-6 border-2 border-primary rounded-full opacity-30"
-              animate={{
-                y: [0, -15, 0],
-                x: [0, 10, 0],
-              }}
-              transition={{
-                duration: 5,
-                repeat: Infinity,
-                ease: "easeInOut"
-              }}
-            />
-          </motion.div>
-        </div>
+          {/* Professional Availability Status */}
+         
+        </motion.div>
       </div>
     </section>
   );
