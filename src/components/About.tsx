@@ -59,7 +59,7 @@ const About = () => {
             className="space-y-6 max-w-3xl mx-auto"
           >
             <p className="font-inter text-lg text-slate-600 dark:text-slate-400 leading-relaxed">
-              I'm a passionate 20-year-old Full Stack Developer based in Rabat, Morocco, 
+              I'm a passionate Full Stack Developer based in Rabat, Morocco, 
               with a genuine love for creating meaningful digital experiences. My journey 
               in web development began with curiosity and has evolved into a dedicated 
               pursuit of crafting solutions that make a real impact.
