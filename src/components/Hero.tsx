@@ -110,7 +110,7 @@ const Hero = () => {
               onClick={scrollToProjects}
               className="font-inter font-medium bg-slate-900 hover:bg-slate-800 dark:bg-slate-100 dark:text-slate-900 dark:hover:bg-slate-200 text-white px-8 py-6 text-base transition-all duration-300 shadow-sm hover:shadow-md"
             >
-              View Portfolio
+              View Projects
             </Button>
             <Button
               variant="outline"
