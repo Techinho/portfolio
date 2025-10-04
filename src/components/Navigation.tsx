@@ -33,21 +33,28 @@ const Navigation = () => {
       const sections = navItems.map(item => item.href.replace('#', ''));
       let currentSection = 'home'; // Default to home
       
-      // Check each section to see which one is currently in view
-      for (const section of sections) {
+      // Get the current scroll position
+      const scrollPosition = window.scrollY + 100; // Add offset for navbar
+      
+      // Check each section to find which one we're currently in
+      for (let i = sections.length - 1; i >= 0; i--) {
+        const section = sections[i];
         const element = document.getElementById(section);
+        
         if (element) {
-          const rect = element.getBoundingClientRect();
-          const elementTop = rect.top;
-          const elementBottom = rect.bottom;
+          const offsetTop = element.offsetTop;
           
-          // A section is considered active if it's in the viewport
-          // with some offset to account for the navbar
-          if (elementTop <= 120 && elementBottom >= 120) {
+          // If we've scrolled past this section's start, it's the active one
+          if (scrollPosition >= offsetTop) {
             currentSection = section;
             break;
           }
         }
+      }
+      
+      // Special case for home section when at the very top
+      if (window.scrollY < 100) {
+        currentSection = 'home';
       }
       
       setActiveSection(currentSection);
@@ -58,7 +65,7 @@ const Navigation = () => {
     
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [navItems]);
+  }, []);
 
   const scrollToSection = (href: string) => {
     const targetId = href.replace('#', '');
