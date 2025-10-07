@@ -1,237 +1,122 @@
-import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { ThemeToggle } from "@/components/ui/theme-toggle";
+import { useState, useEffect } from "react"
+import { motion, AnimatePresence } from "framer-motion"
+import { Menu, X } from "lucide-react"
+import { Button } from "@/components/ui/button"
+import { NavLink, Link } from "react-router-dom"
+import ThemeToggle from "@/components/ui/theme-toggle"
 
 const Navigation = () => {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState('home');
-  const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [isScrolled, setIsScrolled] = useState(false)
 
   const navItems = [
-    { name: 'HOME', href: '#home' },
-    { name: 'ABOUT', href: '#about' },
-    { name: 'SKILLS', href: '#skills' },
-    { name: 'PROJECTS', href: '#projects' },
-    { name: 'CONTACT', href: '#contact' },
-  ];
+    { name: "ABOUT", to: "/about" },
+    { name: "PROJECTS", to: "/projects" },
+    { name: "SKILLS", to: "/skills" },
+    { name: "CONTACT", to: "/contact" },
+  ]
 
-  // Handle scroll effect for navbar background
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  // Track active section with improved detection
-  useEffect(() => {
-    const handleScroll = () => {
-      const sections = navItems.map(item => item.href.replace('#', ''));
-      let currentSection = 'home'; // Default to home
-      
-      // Get the current scroll position
-      const scrollPosition = window.scrollY + 100; // Add offset for navbar
-      
-      // Check each section to find which one we're currently in
-      for (let i = sections.length - 1; i >= 0; i--) {
-        const section = sections[i];
-        const element = document.getElementById(section);
-        
-        if (element) {
-          const offsetTop = element.offsetTop;
-          
-          // If we've scrolled past this section's start, it's the active one
-          if (scrollPosition >= offsetTop) {
-            currentSection = section;
-            break;
-          }
-        }
-      }
-      
-      // Special case for home section when at the very top
-      if (window.scrollY < 100) {
-        currentSection = 'home';
-      }
-      
-      setActiveSection(currentSection);
-    };
-
-    // Initial call
-    handleScroll();
-    
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  const scrollToSection = (href: string) => {
-    const targetId = href.replace('#', '');
-    const element = document.getElementById(targetId);
-    
-    if (element) {
-      // Calculate the offset to account for the fixed navbar
-      const navbarHeight = 80; // Adjust this based on your navbar height
-      const elementPosition = element.offsetTop - navbarHeight;
-      
-      window.scrollTo({
-        top: elementPosition,
-        behavior: 'smooth'
-      });
-    } else if (targetId === 'home') {
-      // For home section, scroll to top
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      });
-    }
-    
-    setIsMobileMenuOpen(false);
-  };
-
-  const isActive = (href: string) => activeSection === href.replace('#', '');
+    const onScroll = () => setIsScrolled(window.scrollY > 50)
+    window.addEventListener("scroll", onScroll, { passive: true })
+    onScroll()
+    return () => window.removeEventListener("scroll", onScroll)
+  }, [])
 
   return (
-    <motion.nav 
+    <motion.nav
       className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-        isScrolled 
-          ? 'bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border-b border-slate-200/20 dark:border-slate-700/20 shadow-sm' 
-          : 'bg-transparent'
+        isScrolled ? "bg-white/80 dark:bg-black/60 backdrop-blur-md border-b border-border" : "bg-transparent"
       }`}
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
     >
-      <div className="max-w-7xl mx-auto flex items-center justify-between h-16 px-4 sm:px-6 md:px-8 lg:px-16">
+      <div className="max-w-7xl mx-auto flex items-center justify-between h-20 px-6 md:px-16">
         {/* Logo */}
         <motion.div
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6, delay: 0.1 }}
         >
-          <a
-            href="#home"
-            onClick={(e) => {
-              e.preventDefault();
-              scrollToSection('#home');
-            }}
-            className="font-jovelle text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-black dark:text-white hover:opacity-90 transition-opacity"
+          <Link
+            to="/"
+            className="text-3xl md:text-4xl font-bold text-foreground leading-tight"
           >
-            Ezzaouya
-          </a>
+            <span className="font-jovelle ">Ezzaouya</span>
+          </Link>
         </motion.div>
 
-
         {/* Desktop Navigation */}
-        <motion.div 
-          className="hidden lg:flex items-center space-x-1"
+        <motion.div
+          className="hidden md:flex items-center space-x-8"
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
         >
           {navItems.map((item, index) => (
-            <motion.button
+            <NavLink
               key={item.name}
-              onClick={() => scrollToSection(item.href)}
-              className={`relative px-4 py-2 text-sm font-medium transition-all duration-300 rounded-lg ${
-                isActive(item.href)
-                  ? 'text-slate-900 dark:text-slate-100'
-                  : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100'
-              }`}
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
-              whileHover={{ y: -2 }}
-              whileTap={{ y: 0 }}
+              to={item.to}
+              className={({ isActive }) =>
+                `text-muted-foreground hover:text-foreground text-sm font-medium tracking-wider transition-colors duration-200 ${
+                  isActive ? "text-foreground" : ""
+                }`
+              }
             >
               {item.name}
-              {isActive(item.href) && (
-                <motion.div
-                  className="absolute bottom-0 left-1/2 w-1 h-1 bg-slate-900 dark:bg-slate-100 rounded-full"
-                  layoutId="activeIndicator"
-                  initial={{ opacity: 0, scale: 0 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.3 }}
-                  style={{ x: '-50%' }}
-                />
-              )}
-            </motion.button>
+            </NavLink>
           ))}
           
           {/* Theme Toggle */}
-          <motion.div
-            className="ml-2"
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.8 }}
-          >
-            <ThemeToggle />
-          </motion.div>
+          <ThemeToggle />
         </motion.div>
 
-        {/* Mobile Controls */}
-        <motion.div
-          className="lg:hidden flex items-center space-x-2"
-          initial={{ opacity: 0, x: 20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.6, delay: 0.1 }}
-        >
+        {/* Mobile Menu Button and Theme Toggle */}
+        <div className="md:hidden flex items-center gap-2">
           <ThemeToggle />
           <Button
             variant="ghost"
             size="icon"
-            className="text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800"
+            className="text-white hover:bg-white/10"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
-            <motion.div
-              animate={{ rotate: isMobileMenuOpen ? 90 : 0 }}
-              transition={{ duration: 0.3, ease: "easeInOut" }}
-            >
-              {isMobileMenuOpen ? (
-                <X className="h-5 w-5" />
-              ) : (
-                <Menu className="h-5 w-5" />
-              )}
-            </motion.div>
+            {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
           </Button>
-        </motion.div>
+        </div>
       </div>
 
       {/* Mobile Navigation */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
-            className="lg:hidden bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-t border-slate-200/20 dark:border-slate-700/20"
+            className="md:hidden bg-white/95 dark:bg-black/95 backdrop-blur-md border-t border-border"
             initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
+            animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
+            transition={{ duration: 0.3 }}
           >
-            <div className="py-4 px-4 sm:px-6 space-y-1">
-              {navItems.map((item, index) => (
-                <motion.button
+            <div className="py-6 px-6 space-y-4">
+              {navItems.map((item) => (
+                <NavLink
                   key={item.name}
-                  onClick={() => scrollToSection(item.href)}
-                  className={`block w-full text-left px-4 py-3 rounded-lg font-medium transition-all duration-200 ${
-                    isActive(item.href)
-                      ? 'text-slate-900 dark:text-slate-100 bg-slate-100 dark:bg-slate-800'
-                      : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-50 dark:hover:bg-slate-800/50'
-                  }`}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.3, delay: index * 0.1 }}
+                  to={item.to}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className={({ isActive }) =>
+                    `block text-muted-foreground hover:text-foreground text-lg font-medium transition-colors duration-200 ${
+                      isActive ? "text-foreground" : ""
+                    }`
+                  }
                 >
                   {item.name}
-                </motion.button>
+                </NavLink>
               ))}
             </div>
           </motion.div>
         )}
       </AnimatePresence>
     </motion.nav>
-  );
-};
+  )
+}
 
-export default Navigation;
+export default Navigation

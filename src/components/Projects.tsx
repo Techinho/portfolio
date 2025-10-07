@@ -1,46 +1,23 @@
-import { motion } from "framer-motion";
-import { ExternalLink, Github, ArrowUpRight, Eye, Code2 } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { projects } from "@/data/portfolio";
-import { Link } from "react-router-dom";
+import { motion, easeInOut } from "framer-motion"
+import { ExternalLink, Github, ArrowRight } from "lucide-react"
+import { Button } from "@/components/ui/button"
+import { projects as portfolioProjects } from "@/data/portfolio"
+import { useNavigate } from "react-router-dom"
 
 const Projects = () => {
+  const navigate = useNavigate();
+
   const fadeInUp = {
     hidden: { opacity: 0, y: 30 },
-    visible: { 
-      opacity: 1, 
+    visible: {
+      opacity: 1,
       y: 0,
-      transition: { 
-        duration: 0.8, 
-        ease: [0.25, 0.1, 0.25, 1] 
-      }
-    }
-  };
-
-  const slideInFromLeft = {
-    hidden: { opacity: 0, x: -50 },
-    visible: { 
-      opacity: 1, 
-      x: 0,
-      transition: { 
-        duration: 0.8, 
-        ease: [0.25, 0.1, 0.25, 1] 
-      }
-    }
-  };
-
-  const slideInFromRight = {
-    hidden: { opacity: 0, x: 50 },
-    visible: { 
-      opacity: 1, 
-      x: 0,
-      transition: { 
-        duration: 0.8, 
-        ease: [0.25, 0.1, 0.25, 1] 
-      }
-    }
-  };
+      transition: {
+        duration: 0.8,
+        ease: easeInOut,
+      },
+    },
+  }
 
   const staggerContainer = {
     hidden: { opacity: 0 },
@@ -48,159 +25,136 @@ const Projects = () => {
       opacity: 1,
       transition: {
         staggerChildren: 0.2,
-        delayChildren: 0.1
-      }
-    }
-  };
-
-  const featuredProjects = projects.slice(0, 3); // First two as featured
-  // const regularProjects = projects.slice(2, 6); // Next 4 projects
+        delayChildren: 0.1,
+      },
+    },
+  }
 
   return (
-    <section id="projects" className="py-24  ">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-16">
-        {/* Section Header */}
+  <section id="projects" className="py-32 bg-background relative overflow-hidden">
+      {/* Decorative gradient blob */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-accent/5 rounded-full blur-3xl" />
+
+      <div className="max-w-7xl mx-auto px-6 md:px-16 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
           viewport={{ once: true, margin: "-100px" }}
-          className="text-center mb-24"
+          className="text-center mb-20 space-y-6"
         >
-          <div className="inline-flex items-center px-6 py-3 rounded-full border border-slate-200/60 dark:border-slate-700/60 bg-white/80 dark:bg-slate-800/80 backdrop-blur-md mb-8 shadow-sm">
-            <Code2 className="h-4 w-4 mr-2 text-slate-600 dark:text-slate-300" />
-            <span className="text-slate-600 dark:text-slate-300 text-sm font-medium tracking-wide font-inter">
-              SELECTED WORKS
-            </span>
+          <div className="inline-block">
+            <span className="text-accent text-sm font-semibold tracking-widest uppercase">Selected Works</span>
+            <div className="h-0.5 w-16 bg-accent mt-2 mx-auto" />
           </div>
 
-          <h2 className="font-inter text-4xl sm:text-5xl md:text-6xl font-light text-slate-900 dark:text-slate-100 leading-tight tracking-tight mb-8">
-            <span >Creative&nbsp;</span>
-            <span className="font-medium bg-gradient-to-r from-slate-900 via-slate-700 to-slate-600 dark:from-slate-100 dark:via-slate-300 dark:to-slate-400 bg-clip-text text-transparent">
-              Projects
-            </span>
+          <h2 className="text-4xl md:text-6xl font-bold text-foreground leading-tight">
+            Featured &nbsp;
+            <span className="text-muted-foreground">Projects</span>
           </h2>
         </motion.div>
 
-        {/* Featured Projects - Split Layout */}
-        <div className="space-y-32 mb-32">
-          {featuredProjects.map((project, index) => (
-            <motion.div
-              key={project.id}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: "-100px" }}
-              className={`flex flex-col ${index % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'} items-center gap-12 lg:gap-20`}
-            >
-              {/* Project Image */}
+        <motion.div
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          className="space-y-24"
+        >
+          {portfolioProjects.map((project, index) => (
+            <>
               <motion.div
-                variants={index % 2 === 0 ? slideInFromLeft : slideInFromRight}
-                className="flex-1 w-full"
+                key={project.id}
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: false, amount: 0.3 }}
+                transition={{ duration: 0.7, ease: 'easeOut' }}
+                className={`flex flex-col ${index % 2 === 0 ? "lg:flex-row" : "lg:flex-row-reverse"} gap-12 items-center bg-gray-100 dark:bg-card border border-border rounded-2xl shadow-lg shadow-accent/10 p-8 md:p-12 transition-colors duration-300`}
               >
-                <div className="group relative transition-all duration-700 hover:-translate-y-2">
-                  <div className="aspect-[4/3] relative">
-                    <img 
-                      src={project.image} 
-                      alt={`${project.title} preview`}
-                      className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110zz"
-                      loading={index === 0 ? "eager" : "lazy"}
-                    />
-                    
-                   
-                  </div>
+              {/* Project Image */}
+              <div className="flex-1 w-full">
+                <div className="group relative overflow-hidden">
+                  <img
+                    src={project.image || "/placeholder.svg"}
+                    alt={project.title}
+                    className="w-full h-[400px] object-cover transition-transform duration-700 group-hover:scale-105 shadow-2xl"
+                  />
                 </div>
-              </motion.div>
+              </div>
 
               {/* Project Content */}
-              <motion.div
-                variants={index % 2 === 0 ? slideInFromRight : slideInFromLeft}
-                className="flex-1 space-y-8"
-              >
-                <div className="space-y-6">
-                 
-                  <h3 className="font-inter text-3xl lg:text-4xl font-bold text-slate-900 dark:text-slate-100 leading-tight">
-                    {project.title}
-                  </h3>
-                  
-                  <p className="font-inter text-md font-light text-slate-600 dark:text-slate-400 leading-relaxed max-w-xl">
-                    {project.description}
-                  </p>
+              <div className="flex-1 space-y-6">
+                <h3 className="text-3xl md:text-4xl font-bold text-foreground">{project.title}</h3>
+
+                <p className="text-muted-foreground text-lg leading-relaxed">{project.description}</p>
+
+                <div className="flex flex-wrap gap-3">
+                  {project.technologies.map((tech) => (
+                    <span
+                      key={tech}
+                      className="px-4 py-2 text-sm bg-card border border-border rounded-full text-muted-foreground"
+                    >
+                      {tech}
+                    </span>
+                  ))}
                 </div>
-                
-                {/* Tech Stack */}
-                <div className="space-y-4">
-                  <h4 className="font-inter text-sm font-semibold text-slate-900 dark:text-slate-100 uppercase tracking-wider">
-                    Technology Stack
-                  </h4>
-                  <div className="flex flex-wrap gap-3">
-                    {project.technologies.map((tech) => (
-                      <Badge 
-                        key={tech}
-                        variant="outline" 
-                        className="px-2 py-1 text-sm font-inter border-2 border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 bg-white/60 dark:bg-slate-800/60 backdrop-blur-sm hover:border-slate-300 dark:hover:border-slate-600 hover:bg-white dark:hover:bg-slate-800 transition-all duration-200"
-                      >
-                        {tech}
-                      </Badge>
-                    ))}
-                  </div>
-                </div>
-                
-                {/* Action Buttons */}
-                <div className="flex space-x-4 pt-4">
-                  <Button 
-                    className="bg-slate-900 hover:bg-slate-800 dark:bg-slate-100 dark:text-slate-900 dark:hover:bg-slate-200 text-white px-8 py-6 text-base font-inter font-semibold rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
+
+                <div className="flex gap-4 pt-4">
+                  <Button
+                    className="bg-accent hover:bg-accent/90 text-accent-foreground font-semibold px-6 py-6 rounded-full shadow-lg shadow-accent/20 hover:shadow-accent/40 transition-all duration-300"
                     asChild
                   >
                     <a href={project.liveUrl} target="_blank" rel="noopener noreferrer">
-                      <ExternalLink className="h-5 w-5 mr-3" />
+                      <ExternalLink className="h-5 w-5 mr-2" />
                       Live Demo
                     </a>
                   </Button>
-                  <Button 
+                  <Button
                     variant="outline"
-                    className="border-2 border-slate-200 dark:border-slate-700 text-slate-700 hover:text-slate-900 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 px-8 py-6 text-base font-inter font-semibold rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
+                    className="border-2 border-border text-foreground leading-tight   hover:shadow-md px-6 py-6 rounded-full transition-all duration-300 bg-transparent"
                     asChild
                   >
                     <a href={project.githubUrl} target="_blank" rel="noopener noreferrer">
-                      <Github className="h-5 w-5 mr-3" />
-                      View Code
+                      <Github className="h-5 w-5 mr-2" />
+                      Code
                     </a>
                   </Button>
                 </div>
-              </motion.div>
+              </div>
             </motion.div>
+              {index !== portfolioProjects.length - 1 && (
+                <div className="w-full flex justify-center my-12">
+                  <div className="h-px w-3/4 bg-border dark:bg-border/60 transition-colors duration-300" />
+                </div>
+              )}
+            </>
           ))}
-        </div>
+        </motion.div>
 
-        {/* Additional Projects - Masonry-style Grid */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
+          transition={{ duration: 0.8, delay: 0.3 }}
           viewport={{ once: true }}
-          className="text-center mt-20 pt-16 border-t border-slate-200 dark:border-slate-800"
+          className="text-center mt-20 pt-16 border-t border-border"
         >
-          <div className="space-y-6">
-            <h3 className="font-inter text-xl font-medium text-slate-900 dark:text-slate-100">
-              Explore More Work
-            </h3>
-            <p className="font-inter text-slate-600 dark:text-slate-400 max-w-md mx-auto">
-              View detailed case studies and additional projects in my full portfolio
-            </p>
-            <Button 
-              className="font-inter font-medium bg-slate-900 hover:bg-slate-800 dark:bg-slate-100 dark:text-slate-900 dark:hover:bg-slate-200 text-white px-8 py-6 text-base transition-all duration-300 shadow-sm hover:shadow-md"
-              asChild
+          <Button
+            asChild
+            className="bg-card hover:bg-accent/5 text-foreground border border-border font-semibold px-8 py-6 rounded-full transition-all duration-300"
+          >
+            <a
+              href="https://github.com/Techinho?tab=repositories"
+              target="_blank"
+              rel="noopener noreferrer"
             >
-              <Link to="/projects">
-                <ArrowUpRight className="h-4 w-4 mr-2" />
-                View All Projects
-              </Link>
-            </Button>
-          </div>
+              View All Projects
+              <ArrowRight className="ml-2 h-5 w-5" />
+            </a>
+          </Button>
         </motion.div>
       </div>
     </section>
-  );
-};
+  )
+}
 
-export default Projects;
+export default Projects

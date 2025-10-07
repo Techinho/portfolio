@@ -1,11 +1,11 @@
 export const personalInfo = {
   name: "Ilyass Ezzaouya",
   title: "Full Stack Developer",
-  tagline: "Creating modern web experiences with React, Node.js & Laravel",
+  tagline: "Transforming ideas into impactful digital solutions. I build robust, user-focused web applications that empower businesses and inspire people.",
   location: "Rabat, Morocco",
   age: 20,
   email: "ilyassezzaouya4@gmail.com",
-  phone: "06 82 14 61 22",
+  phone: "+212682146122",
   description: "Passionate Full Stack MERN & Laravel developer who creates modern web applications by mastering Front-End (HTML, CSS, JavaScript, React) and Back-End (Node.js, Express, MongoDB, Laravel, MySQL). Curious and autonomous, I continuously learn new technologies to improve the quality of my projects.",
   resumeUrl: "/resume.pdf" // You can add your PDF resume here
 };
