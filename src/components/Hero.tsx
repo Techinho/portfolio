@@ -120,10 +120,10 @@ const Hero = () => {
   <div className="space-y-5 md:space-y-6">
 
           <motion.div variants={fadeInUp}>
-            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-foreground leading-tight font-bold">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-foreground leading-tight font-medium">
               Hi, I'm Ilyass
               <br />
-              <span className="block text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-accent font-extrabold mt-2">Fullstack Web Developer</span>
+              <span className="block text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-accent font-bold mt-2">Fullstack Web Developer</span>
             </h1>
           </motion.div>
           

@@ -41,9 +41,9 @@ const Navigation = () => {
         >
           <Link
             to="/"
-            className="text-3xl md:text-4xl font-bold text-foreground leading-tight"
+            className="text-3xl md:text-4xl font-jovelle font-bold text-foreground leading-tight"
           >
-            <span className="font-jovelle ">Ezzaouya</span>
+            <span className="">Ezzaouya</span>
           </Link>
         </motion.div>
 
@@ -59,8 +59,10 @@ const Navigation = () => {
               key={item.name}
               to={item.to}
               className={({ isActive }) =>
-                `text-muted-foreground hover:text-foreground text-sm font-medium tracking-wider transition-colors duration-200 ${
-                  isActive ? "text-foreground" : ""
+                `relative px-1 text-muted-foreground hover:text-foreground text-sm font-medium tracking-wider transition-all duration-200
+                after:absolute after:inset-x-0 after:-bottom-3 after:h-0.5 after:rounded-full after:scale-x-0 after:origin-center after:bg-accent after:transition-transform after:duration-200
+                hover:after:scale-x-100 ${
+                  isActive ? 'text-accent after:scale-x-100' : ''
                 }`
               }
             >
@@ -104,7 +106,7 @@ const Navigation = () => {
                   onClick={() => setIsMobileMenuOpen(false)}
                   className={({ isActive }) =>
                     `block text-muted-foreground hover:text-foreground text-lg font-medium transition-colors duration-200 ${
-                      isActive ? "text-foreground" : ""
+                      isActive ? 'text-accent' : ''
                     }`
                   }
                 >

@@ -10,8 +10,7 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Inter:wght@100..900&family=Roboto+Slab:wght@100..900&display=swap');
-/* Beautiful portfolio design system with purple accents and Inter font */
+/* Fonts are loaded via index.html (Geist, Inter). */
 
 
 @font-face {

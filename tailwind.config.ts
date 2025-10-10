@@ -14,9 +14,10 @@ export default {
     },
     extend: {
       fontFamily: {
-        body: ['Inter', 'sans-serif'],
-        display: ['Inter', 'sans-serif'],
-        inter: ['Inter', 'sans-serif'],
+  sans: ['Geist', 'Inter', 'sans-serif'],
+  body: ['Geist', 'Inter', 'sans-serif'],
+  display: ['Geist', 'Inter', 'sans-serif'],
+  inter: ['Geist', 'Inter', 'sans-serif'],
         mooxy: ['mooxy', 'Inter', 'sans-serif'],
         sureme: ['sureme', 'Inter', 'sans-serif'],
         quera: ['quera', 'Inter', 'sans-serif'],
