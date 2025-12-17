@@ -1,0 +1,87 @@
+Ezzaouya Ilyass
+Full Stack Developer
+Telephone:
+Email:
+Linkedin:
+Portfolio:
+
++212682146122
+ilyassezzaouya4@gmail.com
+https://www.linkedin.com/in/IlyassEzzaouya
+ezzaouya.tech
+Github: https://github.com/Techinho
+
+SUMMARY
+Passionate Front-end Developer focused on building intuitive, accessible, and user-centered web interfaces.
+Skilled in React.js, JavaScript (ES6+), and modern UI/UX design, I thrive in collaborative, agile teams and love
+combining creativity and technology to make education more interactive and impactful.
+
+WORK EXPERIENCE
+Full Stack Developer (MERN) Intern, Ark-x Talent Solutions
+
+Juillet 2025 - Present
+
+Developed a MERN web platform for event management (in-person, online, hybrid) with ticketing, QR
+code, integrations (Google Calendar, Zoom, Stripe), and multi-role dashboards.
+Implemented Redux Toolkit, JWT, Socket.io, Cloudinary, SendGrid, and adopted Git/GitHub best
+practices in an agile environment.
+Full Stack Developer Intern , General Treasury of the Kingdom (TGR)
+
+Mars 2025 - Avril 2025
+
+Developed the SGRF web application for centralized management of public revenues using React.js,
+Laravel, and MySQL, including dashboards and secure authentication (OAuth2, JWT).
+Implemented tracking and reporting modules to optimize management and performance.
+
+PROJECTS
+TECHEDU
+Developed a responsive e-learning platform integrating YouTube API, a book library, and interactive
+quizzes.
+Features a modern interface with Tailwind CSS and optimized state management via Redux.
+Stack: React, Redux, Nodejs, Express, YoutubeV3Api
+Kima (MERN)
+MERN web app for managing in-person, online, and hybrid events with a smooth experience for
+organizers and attendees.
+Includes ticketing, guest management, QR check-in, and integrations with Google Calendar, Zoom,
+and Stripe.
+Stack: MongoDB, Express.js, React.js, Node.js, Redux Toolkit, Material UI, JWT, Socket.io,
+Cloudinary, SendGrid.
+ContraIQ
+AI-powered web app for automated contract review, clause extraction, risk detection, and multilingual
+translation (Arabic, English, French).
+Stack: Next.js(App Router) 15, React 19, TypeScript, Tailwind CSS, Supabase, OpenAI API, Puppeteer.
+
+EDUCATION
+Full Stack Mern Bootcamp – JobinTech, Rabat
+
+July 2025 - November 2025
+
+DTS in Digital Development - ISTA HAY RIAD, Rabat
+
+September 2023 - July 2025
+
+SKILLS
+FrontEnd: React.js, Next.js, Bootstrap, Tailwind
+CSS, JavaScript (ES6+), TypeScript, HTML5, CSS3.
+BackEnd : Node.js, Express, Laravel, PHP, Python,
+SQL, MongoDB, MySQL, NoSQL.
+DevOps & Tools : Docker, CI/CD (GitHub Actions,
+GitLab CI), Git, GitHub, GitLab, VS Code, Figma,
+Postman, Jira, SonarQube
+Methodologies : Agile Scrum, UML, Merise
+AI Integration:Experience using AI-assisted tools to
+enhance user interfaces and workflow automation
+LANGUAGES Arabic (C1), French (B1), English (B1)
+
+CERTIFICATES
+AI Career Essentials (AiCE), ALX
+Advanced Git & GitHub, Nano Degree – JobinTech
+Full Stack JS MERN (MongoDB Module) – JobinTech
+Agile & Scrum Fundamentals– JobinTech
+Full Stack JS MERN (NodeJS Module ) – JobinTech
+Node.js & Express.js Certificates – Codecademy
+Learn TypeScript – Codecademy
+Defending Node Applications from SQL Injection,
+XSS, & CSRF Attacks – Codecademy
+
+
