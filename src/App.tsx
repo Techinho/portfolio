@@ -4,6 +4,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "@/hooks/use-theme";
+import PageLoader from "@/components/PageLoader";
 import Layout from "./pages/Layout";
 import Home from "./pages/Home";
 import AboutPage from "./pages/AboutPage";
@@ -11,13 +12,15 @@ import SkillsPage from "./pages/SkillsPage";
 import ProjectsPage from "./pages/ProjectsPage";
 import ContactPage from "./pages/ContactPage";
 import NotFound from "./pages/NotFound";
+import ProjectDetails from "./pages/ProjectDetails";
 
 const queryClient = new QueryClient();
 
 const App = () => (
-  <ThemeProvider defaultTheme="dark" storageKey="folio-ui-theme">
+  <ThemeProvider defaultTheme="dark" storageKey="folio-ui-theme" >
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
+        <PageLoader />
         <Toaster />
         <Sonner />
         <BrowserRouter>
@@ -28,6 +31,7 @@ const App = () => (
               <Route path="/skills" element={<SkillsPage />} />
               <Route path="/projects" element={<ProjectsPage />} />
               <Route path="/contact" element={<ContactPage />} />
+              <Route path="/project/:slug" element={<ProjectDetails />} />
               <Route path="*" element={<NotFound />} />
             </Route>
           </Routes>

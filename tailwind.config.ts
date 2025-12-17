@@ -14,14 +14,12 @@ export default {
     },
     extend: {
       fontFamily: {
-  sans: ['Geist', 'Inter', 'sans-serif'],
-  body: ['Geist', 'Inter', 'sans-serif'],
-  display: ['Geist', 'Inter', 'sans-serif'],
-  inter: ['Geist', 'Inter', 'sans-serif'],
-        mooxy: ['mooxy', 'Inter', 'sans-serif'],
-        sureme: ['sureme', 'Inter', 'sans-serif'],
-        quera: ['quera', 'Inter', 'sans-serif'],
-        jovelle: ['jovelle', 'Inter', 'sans-serif'],
+        sans: ['Inter', 'sans-serif'],
+        serif: ['Playfair Display', 'serif'],
+        mooxy: ['mooxy', 'sans-serif'],
+        quera: ['quera', 'sans-serif'],
+        jovelle: ['jovelle', 'sans-serif'],
+        sureme: ['sureme', 'sans-serif'],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -50,6 +48,19 @@ export default {
         accent: {
           DEFAULT: "hsl(var(--accent))",
           foreground: "hsl(var(--accent-foreground))",
+        },
+        gold: {
+          DEFAULT: "#D4AF37",
+          50: "#F9F5E6",
+          100: "#F2EBC6",
+          200: "#E6D68F",
+          300: "#DAC25F",
+          400: "#D4AF37",
+          500: "#B59226",
+          600: "#8D711C",
+          700: "#665114",
+          800: "#42340D",
+          900: "#211A06",
         },
         popover: {
           DEFAULT: "hsl(var(--popover))",

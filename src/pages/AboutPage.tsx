@@ -12,9 +12,7 @@ const AboutPage = () => (
         />
       </Helmet>
   <PageTransition>
-    <section id="about">
-      <About />
-    </section>
+    <About />
   </PageTransition></>
 );
 

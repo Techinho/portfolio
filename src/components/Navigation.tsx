@@ -8,6 +8,8 @@ import ThemeToggle from "@/components/ui/theme-toggle"
 const Navigation = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
+  const [isVisible, setIsVisible] = useState(true)
+  const [lastScrollY, setLastScrollY] = useState(0)
 
   const navItems = [
     { name: "ABOUT", to: "/about" },
@@ -17,107 +19,138 @@ const Navigation = () => {
   ]
 
   useEffect(() => {
-    const onScroll = () => setIsScrolled(window.scrollY > 50)
-    window.addEventListener("scroll", onScroll, { passive: true })
-    onScroll()
-    return () => window.removeEventListener("scroll", onScroll)
-  }, [])
+    const controlNavbar = () => {
+      const currentScrollY = window.scrollY
+      
+      // Determine if scrolled for background style
+      setIsScrolled(currentScrollY > 50)
+
+      // Determine visibility based on scroll direction
+      if (currentScrollY > lastScrollY && currentScrollY > 50) {
+        // Scrolling down & not at top -> Hide
+        setIsVisible(false)
+      } else {
+        // Scrolling up -> Show
+        setIsVisible(true)
+      }
+
+      setLastScrollY(currentScrollY)
+    }
+
+    window.addEventListener("scroll", controlNavbar)
+    return () => window.removeEventListener("scroll", controlNavbar)
+  }, [lastScrollY])
 
   return (
-    <motion.nav
-      className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-        isScrolled ? "bg-white/80 dark:bg-black/60 backdrop-blur-md border-b border-border" : "bg-transparent"
-      }`}
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
-    >
-      <div className="max-w-7xl mx-auto flex items-center justify-between h-20 px-6 md:px-16">
-        {/* Logo */}
-        <motion.div
-          initial={{ opacity: 0, x: -20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.6, delay: 0.1 }}
-        >
+    <>
+      <motion.nav
+        className="fixed top-6 left-0 right-0 z-50 flex justify-center px-4 pointer-events-none"
+        initial={{ y: -100, opacity: 0 }}
+        animate={{ 
+          y: isVisible ? 0 : -150, 
+          opacity: isVisible ? 1 : 0 
+        }}
+        transition={{ duration: 0.5, ease: [0.32, 0.72, 0, 1] }}
+      >
+        <div className={`
+          pointer-events-auto
+          flex items-center justify-between 
+          md:justify-center md:gap-12
+          px-6 py-3 md:px-8 md:py-4
+          rounded-full 
+          bg-black/40 backdrop-blur-xl 
+          border border-white/10 
+          shadow-[0_8px_32px_rgba(0,0,0,0.2)]
+          transition-all duration-500
+          ${isScrolled ? 'w-full max-w-5xl bg-black/60' : 'w-full max-w-4xl'}
+        `}>
+          
+          {/* Logo */}
           <Link
             to="/"
-            className="text-3xl md:text-4xl font-jovelle font-bold text-foreground leading-tight"
+            className="text-xl md:text-2xl font-serif font-bold text-white tracking-tight hover:text-gold-400 transition-colors"
           >
-            <span className="">Ezzaouya</span>
+            Ezzaouya<span className="text-gold-400">.</span>
           </Link>
-        </motion.div>
 
-        {/* Desktop Navigation */}
-        <motion.div
-          className="hidden md:flex items-center space-x-8"
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-        >
-          {navItems.map((item, index) => (
-            <NavLink
-              key={item.name}
-              to={item.to}
-              className={({ isActive }) =>
-                `relative px-1 text-muted-foreground hover:text-foreground text-sm font-medium tracking-wider transition-all duration-200
-                after:absolute after:inset-x-0 after:-bottom-3 after:h-0.5 after:rounded-full after:scale-x-0 after:origin-center after:bg-accent after:transition-transform after:duration-200
-                hover:after:scale-x-100 ${
-                  isActive ? 'text-accent after:scale-x-100' : ''
-                }`
-              }
+          {/* Desktop Links */}
+          <div className="hidden md:flex items-center gap-8">
+            {navItems.map((item) => (
+              <NavLink
+                key={item.name}
+                to={item.to}
+                className={({ isActive }) =>
+                  `relative text-xs font-medium tracking-[0.2em] transition-all duration-300 font-sans uppercase
+                  ${isActive ? 'text-gold-400' : 'text-zinc-400 hover:text-white'}
+                  `
+                }
+              >
+                {({ isActive }) => (
+                  <span className="relative">
+                    {item.name}
+                    {isActive && (
+                      <motion.span
+                        layoutId="nav-dot"
+                        className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-1 h-1 bg-gold-400 rounded-full"
+                        transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                      />
+                    )}
+                  </span>
+                )}
+              </NavLink>
+            ))}
+          </div>
+
+          {/* Mobile Menu Toggle */}
+          <div className="md:hidden">
+            <Button
+              variant="ghost"
+              size="icon"
+              className="text-zinc-400 hover:text-white hover:bg-white/5 rounded-full w-10 h-10"
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             >
-              {item.name}
-            </NavLink>
-          ))}
-          
-          {/* Theme Toggle */}
-          <ThemeToggle />
-        </motion.div>
-
-        {/* Mobile Menu Button and Theme Toggle */}
-        <div className="md:hidden flex items-center gap-2">
-          <ThemeToggle />
-          <Button
-            variant="ghost"
-            size="icon"
-            className="text-foreground leading-tight hover:bg-white/10"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          >
-            {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-          </Button>
+              {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
+            </Button>
+          </div>
         </div>
-      </div>
+      </motion.nav>
 
-      {/* Mobile Navigation */}
+      {/* Mobile Full Screen Menu */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
-            className="md:hidden bg-white/95 dark:bg-black/95 backdrop-blur-md border-t border-border"
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.3 }}
+            className="fixed inset-0 z-40 bg-black/95 backdrop-blur-2xl pt-32 px-6 md:hidden"
           >
-            <div className="py-6 px-6 space-y-4">
-              {navItems.map((item) => (
-                <NavLink
+            <div className="flex flex-col items-center gap-8">
+              {navItems.map((item, idx) => (
+                <motion.div
                   key={item.name}
-                  to={item.to}
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className={({ isActive }) =>
-                    `block text-muted-foreground hover:text-foreground text-lg font-medium transition-colors duration-200 ${
-                      isActive ? 'text-accent' : ''
-                    }`
-                  }
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: idx * 0.1 }}
                 >
-                  {item.name}
-                </NavLink>
+                  <NavLink
+                    to={item.to}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className={({ isActive }) =>
+                      `text-3xl font-serif font-light tracking-tight ${
+                        isActive ? 'text-gold-400 italic' : 'text-white'
+                      }`
+                    }
+                  >
+                    {item.name}
+                  </NavLink>
+                </motion.div>
               ))}
             </div>
           </motion.div>
         )}
       </AnimatePresence>
-    </motion.nav>
+    </>
   )
 }
 

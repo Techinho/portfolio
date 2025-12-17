@@ -5,22 +5,90 @@ interface PageTransitionProps {
   children: ReactNode;
 }
 
-const variants = {
-  initial: { opacity: 0, y: 12 },
-  animate: { opacity: 1, y: 0, transition: { duration: 0.4, ease: [0.25, 0.1, 0.25, 1] } },
-  exit: { opacity: 0, y: -12, transition: { duration: 0.3, ease: [0.4, 0, 0.2, 1] } }
+// Black Panel (Top Layer)
+const blackVariants = {
+  initial: { y: "100%" },
+  animate: { 
+    y: "-100%", 
+    transition: { 
+      duration: 1.2, 
+      ease: [0.87, 0, 0.13, 1] as any, // Very smooth custom easing
+    } 
+  },
+  exit: { 
+    y: "0%", 
+    transition: { 
+      duration: 1.2, 
+      ease: [0.87, 0, 0.13, 1] as any,
+      delay: 0.2
+    } 
+  }
+};
+
+// Gold Panel (Middle Layer)
+const goldVariants = {
+  initial: { y: "100%" },
+  animate: { 
+    y: "-100%", 
+    transition: { 
+      duration: 1.2, 
+      ease: [0.87, 0, 0.13, 1] as any,
+      delay: 0.1
+    } 
+  },
+  exit: { 
+    y: "0%", 
+    transition: { 
+      duration: 1.2, 
+      ease: [0.87, 0, 0.13, 1] as any
+    } 
+  }
+};
+
+// Content Animation
+const contentVariants = {
+  initial: { opacity: 0, y: 20 },
+  animate: { 
+    opacity: 1, 
+    y: 0,
+    transition: { duration: 0.8, delay: 0.6, ease: "easeOut" } 
+  },
+  exit: { 
+    opacity: 0,
+    y: -20,
+    transition: { duration: 0.4, ease: "easeIn" }
+  }
 };
 
 export const PageTransition = ({ children }: PageTransitionProps) => (
-  <motion.main
-    variants={variants}
-    initial="initial"
-    animate="animate"
-    exit="exit"
-    className="min-h-[80vh]"
-  >
-    {children}
-  </motion.main>
+  <div className="relative w-full">
+    {/* Transition Curtains */}
+    <motion.div
+      variants={blackVariants}
+      initial="initial"
+      animate="animate"
+      exit="exit"
+      className="fixed inset-0 z-[60] bg-[#050505] pointer-events-none"
+    />
+    <motion.div
+      variants={goldVariants}
+      initial="initial"
+      animate="animate"
+      exit="exit"
+      className="fixed inset-0 z-[59] bg-gold-400 pointer-events-none"
+    />
+    
+    {/* Main Content */}
+    <motion.div
+      variants={contentVariants}
+      initial="initial"
+      animate="animate"
+      exit="exit"
+      className="w-full"
+    >
+      {children}
+    </motion.div>
+  </div>
 );
 
 export default PageTransition;
