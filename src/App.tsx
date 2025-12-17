@@ -12,7 +12,7 @@ import SkillsPage from "./pages/SkillsPage";
 import ProjectsPage from "./pages/ProjectsPage";
 import ContactPage from "./pages/ContactPage";
 import NotFound from "./pages/NotFound";
-import ProjectDetails from "./pages/ProjectDetails";
+import ProjectDetails from "@/pages/ProjectDetails";
 
 const queryClient = new QueryClient();
 
